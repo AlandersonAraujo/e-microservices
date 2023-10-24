@@ -10,14 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final SendEmailService sendEmailService;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, SendEmailService sendEmailService) {
         this.customerRepository = customerRepository;
+        this.sendEmailService = sendEmailService;
     }
 
     @Transactional
     public Customer save(Customer customer) {
-        return customerRepository.save(customer);
+        Customer newCustomer = customerRepository.save(customer);
+        sendEmailService.produce(customer);
+        return newCustomer;
     }
 }
