@@ -2,9 +2,9 @@ package com.emicroservices.email.infrastructure.queue;
 
 import com.emicroservices.email.adapters.queue.MessageConsumerGateway;
 import com.emicroservices.email.presentation.dto.EmailRecordDTO;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class AMQPMessageConsumerAdapter implements MessageConsumerGateway {
 
     @Override
